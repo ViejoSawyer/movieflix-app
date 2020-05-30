@@ -28,7 +28,11 @@ class Movies extends Component {
 
   componentDidMount() {
     //Initialize the App Client
-    this.client = Stitch.initializeDefaultAppClient('candidatetest-ovajb');
+    if (!Stitch.hasAppClient('candidatetest-ovajb')) {
+      this.client = Stitch.initializeDefaultAppClient('candidatetest-ovajb');
+    } else {
+      this.client = Stitch.defaultAppClient;
+    }
     //Get a MongoDB Service Client
     //This is used for logging in and communicating with mongoDB Stitch
     this.db = this.client
